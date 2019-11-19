@@ -1,0 +1,12 @@
+.grid {
+  height: calc(100vh - 252px);
+  padding: 1rem;
+}
+
+.page-title {
+  padding: 1rem;
+}
+
+.btn-group {
+  margin-right: 0rem !important;
+}

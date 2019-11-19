@@ -1,0 +1,37 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${DB_CONNECTION_URL:jdbc:postgresql://127.0.0.1:5432/dc-proposta}
+    driver-class-name: org.postgresql.Driver
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:123}
+#    jndi-name: 
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      use-new-id-generator-mappings: true
+      ddl-auto: none #create, update, none 
+    show-sql: false
+  resources:
+    chain:
+      html-application-cache: true
+      enabled: true
+      cache: true
+  flyway:
+    validate-on-migrate: true
+    out-of-order: true
+    locations: classpath:/db/migration
+
+    enabled: true
+    schemas:
+     - public
+server:
+  port : 8080

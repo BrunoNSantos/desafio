@@ -1,0 +1,50 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header class="header-6">
+  <div class="branding">
+    <a href="..." class="nav-link">
+      <clr-icon shape="e-check"></clr-icon>
+      <span class="title">Proposta</span>
+    </a>
+  </div>
+</header>
+
+<h2 class="page-title">Proposta de Cadastro de Clientes</h2>
+
+<clr-datagrid class="grid" (clrDgRefresh)="buscar($event)" [clrDgLoading]="carregando"
+              [(clrDgSingleSelected)]="itemSelecionado" [clrDgRowSelection]="true">
+  <clr-dg-action-bar>
+    <clr-button-group class="btn-primary">
+    </clr-button-group>
+    <clr-button-group>
+      <clr-button name="criarProposta" class="btn btn-sm">
+        <clr-icon shape="plus"></clr-icon>
+        Criar Proposta
+      </clr-button>
+      <clr-button name="aceitarProposta" class="btn btn-sm">
+        <clr-icon shape="check"></clr-icon>
+        Aceitar Proposta
+      </clr-button>
+    </clr-button-group>
+  </clr-dg-action-bar>
+
+  <clr-dg-column [clrDgSortBy]="'nomeCliente'" [clrDgSortOrder]="initialSortDirection">Cliente</clr-dg-column>
+  <clr-dg-column [clrDgSortBy]="'email'">E-mail</clr-dg-column>
+  <clr-dg-column [clrDgSortBy]="'cpf'">CPF</clr-dg-column>
+
+
+  <clr-dg-row *ngFor="let proposta of propostas" [clrDgItem]="proposta">
+    <clr-dg-cell>{{proposta.nomeCliente}}</clr-dg-cell>
+    <clr-dg-cell>{{proposta.email}}</clr-dg-cell>
+    <clr-dg-cell>{{proposta.cpf}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Itens por página</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{total}} usuários
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+
+<router-outlet></router-outlet>
