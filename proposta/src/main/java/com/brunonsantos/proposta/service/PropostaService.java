@@ -1,7 +1,6 @@
 package com.brunonsantos.proposta.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
 
 import com.brunonsantos.proposta.dto.CriarPropostaDTO;
 import com.brunonsantos.proposta.exception.PropostaNaoEncontradaException;
@@ -11,7 +10,7 @@ public interface PropostaService {
 	
 	Proposta criarProposta(CriarPropostaDTO proposta);
 	
-	Page<Proposta> listarPropostas(Pageable pageable);
+	List<Proposta> listarPropostas();
 	
 	void aprovarProposta(Long idProposta) throws PropostaNaoEncontradaException;
 }

@@ -22,7 +22,7 @@ public class CriarPropostaDTO {
 	
 	@NotNull
 	@CPF
-	private Integer cpf;
+	private String cpf;
 	
 	@NotNull
 	private BigDecimal renda;

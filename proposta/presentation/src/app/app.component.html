@@ -3,39 +3,40 @@
   <div class="branding">
     <a href="..." class="nav-link">
       <clr-icon shape="e-check"></clr-icon>
-      <span class="title">Proposta</span>
+      <span class="title">Propostas de Cadastro de Clientes</span>
     </a>
   </div>
 </header>
-
-<h2 class="page-title">Proposta de Cadastro de Clientes</h2>
-
-<clr-datagrid class="grid" (clrDgRefresh)="buscar($event)" [clrDgLoading]="carregando"
-              [(clrDgSingleSelected)]="itemSelecionado" [clrDgRowSelection]="true">
+<clr-datagrid class="grid" (clrDgRefresh)="listarPropostas($event)" [clrDgLoading]="carregando"
+              [(clrDgSingleSelected)]="item" [clrDgRowSelection]="true">
   <clr-dg-action-bar>
     <clr-button-group class="btn-primary">
     </clr-button-group>
     <clr-button-group>
-      <clr-button name="criarProposta" class="btn btn-sm">
+      <clr-button (click)="abrirModalCriarProposta = true" name="criarProposta" class="btn btn-sm">
         <clr-icon shape="plus"></clr-icon>
         Criar Proposta
       </clr-button>
-      <clr-button name="aceitarProposta" class="btn btn-sm">
+      <clr-button (click)="abrirModalAprovarProposta = true"  [disabled]="item === null || item.aprovada" name="aceitarProposta" class="btn btn-sm">
         <clr-icon shape="check"></clr-icon>
-        Aceitar Proposta
+        Aprovar Proposta
       </clr-button>
     </clr-button-group>
   </clr-dg-action-bar>
 
-  <clr-dg-column [clrDgSortBy]="'nomeCliente'" [clrDgSortOrder]="initialSortDirection">Cliente</clr-dg-column>
+  <clr-dg-column [clrDgSortBy]="'nomeCliente'" [clrDgSortOrder]="direcaoOrdenacao">Cliente</clr-dg-column>
   <clr-dg-column [clrDgSortBy]="'email'">E-mail</clr-dg-column>
   <clr-dg-column [clrDgSortBy]="'cpf'">CPF</clr-dg-column>
-
+  <clr-dg-column [clrDgSortBy]="'renda'">Renda</clr-dg-column>
+  <clr-dg-column>Status</clr-dg-column>
 
   <clr-dg-row *ngFor="let proposta of propostas" [clrDgItem]="proposta">
     <clr-dg-cell>{{proposta.nomeCliente}}</clr-dg-cell>
     <clr-dg-cell>{{proposta.email}}</clr-dg-cell>
     <clr-dg-cell>{{proposta.cpf}}</clr-dg-cell>
+    <clr-dg-cell>{{proposta.renda | currency}}</clr-dg-cell>
+    <clr-dg-cell *ngIf="proposta.aprovada"><span class="label label-success">Aprovada</span></clr-dg-cell>
+    <clr-dg-cell *ngIf="!proposta.aprovada"><span class="label label-warning">Aguardando Aprovação</span></clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>
@@ -46,5 +47,43 @@
   </clr-dg-footer>
 </clr-datagrid>
 
+<clr-modal class="modal-xl"  [(clrModalOpen)]="abrirModalCriarProposta">
+  <h3 class="modal-title">Criar Proposta</h3>
+  <div class="modal-body">
+    <form clrForm name="cadastroProposta">
+      <clr-input-container>
+        <label>Cliente</label>
+        <input required="true" clrInput type="text" [(ngModel)]="nomeCliente" name="Cliente" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>CPF</label>
+        <input required="true" clrInput type="text" [(ngModel)]="cpf" name="CPF" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>E-mail</label>
+        <input required="true" clrInput type="email" [(ngModel)]="email" name="E-mail" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Renda</label>
+        <input required="true" clrInput type="number" [(ngModel)]="renda" name="CPF" />
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="abrirModalCriarProposta = false">Cancelar</button>
+    <button type="button" class="btn btn-primary"  (click)="criarProposta()">Criar</button>
+  </div>
+</clr-modal>
+
+<clr-modal class="modal-xl"  [(clrModalOpen)]="abrirModalAprovarProposta">
+  <h3 class="modal-title">Aprovar Proposta</h3>
+  <div class="modal-body">
+  <span>Tem certeza que deseja aprovar esta proposta?</span>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="abrirModalAprovarProposta = false">Cancelar</button>
+    <button id="confirmDeleteButton" type="button" class="btn btn-primary"  (click)="aprovarProposta()">Aprovar</button>
+  </div>
+</clr-modal>
 
 <router-outlet></router-outlet>

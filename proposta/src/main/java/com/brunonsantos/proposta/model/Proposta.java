@@ -39,10 +39,10 @@ public class Proposta {
 	@Column(name = "email")
 	private String email;
 	
-	@NotNull
+	@NotBlank
 	@CPF
 	@Column(name = "cpf")
-	private Integer cpf;
+	private String cpf;
 	
 	@NotNull
 	@Column(name = "renda")
