@@ -13,6 +13,7 @@ import com.brunonsantos.proposta.exception.PropostaNaoEncontradaException;
 import com.brunonsantos.proposta.model.Proposta;
 import com.brunonsantos.proposta.repository.PropostaRepository;
 import com.brunonsantos.proposta.service.PropostaService;
+import com.brunonsantos.proposta.service.RabbitMQSender;
 
 /**
  * @author bruno
@@ -26,13 +27,21 @@ public class PropostaServiceImpl implements PropostaService{
 	@Resource
 	private PropostaRepository propostaRepository;
 	
+	RabbitMQSender rabbitMQSender;
+	
 	
 	@Override
 	@Transactional(readOnly = false)
 	public Proposta criarProposta(CriarPropostaDTO propostaDTO) {
 		Proposta proposta = new Proposta();
+		
 		BeanUtils.copyProperties(propostaDTO, proposta);
-		return this.propostaRepository.save(proposta);
+		this.propostaRepository.save(proposta);
+		
+		// Envia para para p RabbitMQ
+		rabbitMQSender.send(proposta);
+		
+		return proposta;
 	}
 
 	@Override

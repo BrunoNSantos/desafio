@@ -33,5 +33,18 @@ spring:
     enabled: true
     schemas:
      - public
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  main:
+    allow-bean-definition-overriding: true
+
 server:
   port : 8080
+  
+rabbitmq:
+  exchange: cadastro
+  queue: clientes
+  routingkey: cadastro-clientes
