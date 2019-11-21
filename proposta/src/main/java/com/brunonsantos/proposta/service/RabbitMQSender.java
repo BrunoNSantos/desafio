@@ -12,17 +12,17 @@ public class RabbitMQSender {
 
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
-	
+
 	@Value("${rabbitmq.exchange}")
 	private String exchange;
-	
+
 	@Value("${rabbitmq.routingkey}")
-	private String routingkey;	
-	
+	private String routingkey;
+
 	public void send(Proposta proposta) {
 		rabbitTemplate.convertAndSend(exchange, routingkey, proposta);
 		System.out.println("Enviando proposta = " + proposta);
-	    
+
 	}
-	
+
 }

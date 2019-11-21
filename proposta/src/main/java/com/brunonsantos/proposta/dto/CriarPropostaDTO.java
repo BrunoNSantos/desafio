@@ -16,15 +16,15 @@ public class CriarPropostaDTO {
 
 	@NotBlank
 	private String nomeCliente;
-	
+
 	@NotBlank
 	private String email;
-	
+
 	@NotNull
 	@CPF
 	private String cpf;
-	
+
 	@NotNull
 	private BigDecimal renda;
-	
+
 }

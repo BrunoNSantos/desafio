@@ -1,4 +1,4 @@
-package com.brunonsantos.proposta.conf;
+package com.brunonsantos.cartao.conf;
 
 import java.io.IOException;
 

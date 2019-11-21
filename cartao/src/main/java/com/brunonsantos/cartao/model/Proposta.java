@@ -1,4 +1,4 @@
-package com.brunonsantos.proposta.model;
+package com.brunonsantos.cartao.model;
 
 import java.math.BigDecimal;
 
@@ -30,28 +30,24 @@ public class Proposta {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "propostaSeq")
 	@Column(name = "id")
 	private Long id;
-
+	
 	@NotBlank
 	@Column(name = "nome_cliente")
 	private String nomeCliente;
-
+	
 	@NotBlank
 	@Column(name = "email")
 	private String email;
-
+	
 	@NotBlank
 	@CPF
 	@Column(name = "cpf")
 	private String cpf;
-
+	
 	@NotNull
 	@Column(name = "renda")
 	private BigDecimal renda;
-
+	
 	@Column(name = "aprovada")
 	private Boolean aprovada;
-
-	public Proposta() {
-		this.aprovada = false;
-	}
 }
