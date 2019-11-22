@@ -10,4 +10,6 @@ public interface PortadorService {
 	Portador encontrarPorId(Long id);
 	
 	Portador encontrarPorCpf(String cpf);
+
+	Portador encontrarPorEmail(String email);
 }

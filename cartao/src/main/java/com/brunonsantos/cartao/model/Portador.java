@@ -49,6 +49,9 @@ public class Portador {
 	@Column(name = "cpf")
 	private String cpf;
 	
+	@Column(name = "senha", length = 200)
+	private String senha;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_portador")
 	private List<Cartao> cartoes;

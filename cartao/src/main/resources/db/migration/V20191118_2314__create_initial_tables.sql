@@ -25,6 +25,7 @@ CREATE TABLE public.portador
   id bigint NOT NULL DEFAULT nextval('portador_seq'::regclass),
   nome_cliente character varying(100) NOT NULL,
   email character varying(80) NOT NULL,
+  senha character varying(200),
   cpf character varying(20) NOT NULL,
   renda numeric(6,2),
   CONSTRAINT pk_portador PRIMARY KEY (id)

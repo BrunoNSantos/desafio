@@ -38,5 +38,10 @@ public class PortadorServiceImpl implements PortadorService{
 	public Portador encontrarPorCpf(String cpf) {
 		return this.portadorRepository.findByCpf(cpf);
 	}
+
+	@Override
+	public Portador encontrarPorEmail(String email) {
+		return this.portadorRepository.findByEmail(email);
+	}
 	
 }

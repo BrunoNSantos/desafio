@@ -8,4 +8,6 @@ public interface PortadorRepository extends JpaRepository<Portador, Long>{
 
 	Portador findByCpf(String cpf);
 
+	Portador findByEmail(String email);
+
 }

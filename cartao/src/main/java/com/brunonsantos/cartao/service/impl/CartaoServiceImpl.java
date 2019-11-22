@@ -14,6 +14,7 @@ import com.brunonsantos.cartao.repository.CartaoRepository;
 import com.brunonsantos.cartao.repository.PortadorRepository;
 import com.brunonsantos.cartao.service.CartaoService;
 import com.brunonsantos.cartao.service.PortadorService;
+import com.brunonsantos.cartao.utils.AuthUtils;
 
 @Service
 public class CartaoServiceImpl implements CartaoService {
@@ -27,6 +28,7 @@ public class CartaoServiceImpl implements CartaoService {
 	@Resource
 	private PortadorService portadorService;
 
+	
 	@Override
 	public void vincularCartao(Proposta proposta) {
 		final BigDecimal LIMITE_INICIAL = BigDecimal.valueOf(800);
@@ -37,6 +39,7 @@ public class CartaoServiceImpl implements CartaoService {
 		if (portador == null) {
 			portador = new Portador();
 			BeanUtils.copyProperties(proposta, portador);
+			portador.setSenha(AuthUtils.encodePassword(portador.getCpf()));
 		}
 		
 		portador.addCartao(cartao);
